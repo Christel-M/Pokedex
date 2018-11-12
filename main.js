@@ -20,9 +20,9 @@ class Pokemons {
 }
 
 class PokemonsInfo {
-  constructor(rate, evolution, info) {
+  constructor(rate, evolves, info) {
     this.rate = rate;
-    this.evolution = evolution;
+    this.evolves = evolves;
     this.info = info;
   }
 }
@@ -176,14 +176,22 @@ function getInfo(pokemon) {
     if (this.readyState == 4 && this.status == 200) {
       var data = JSON.parse(this.responseText);
       console.log(data);
-      let info = new PokemonsInfo(
-            data["capture_rate"],
-            data["evolves_from_species"]["name"],
-            data["flavor_text_entries"][2]["flavor_text"]
-      );
-      console.log(info);
+      let rate = data["capture_rate"];
+      // let evolves = data["evolves_from_species"]["name"];
+      if(data["evolves_from_species"]["name"] === "undefined") {
+        console.log("no");
+      }
+        for (i in data['flavor_text_entries']) {
+          // console.log(data[i]);
+          if (data['flavor_text_entries'][(i)]['language']['name'] == 'en'){
+            var text = data['flavor_text_entries'][(i)]['flavor_text'];
+          }
+        }
+        console.log(text);
+      // let info = new PokemonsInfo(rate, evolves, text);
+      // console.log(info);
       // displayPokemon(pokemons);
-      writeOnScreen(info);
+      // writeOnScreen(info);
     }
   };
 }
@@ -202,7 +210,7 @@ function writeOnScreen(info) {
 
   var div = document.createElement("div");
   div.innerHTML = `Capture Rate: ${info.rate} <br>
-                  Evolves From: ${info.evolution} <br>
+                  Evolves From: ${info.evolves} <br>
                   Description: ${info.info}`;
   document.getElementById("pokemonText").appendChild(div);
 }
