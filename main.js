@@ -20,9 +20,9 @@ class Pokemons {
 }
 
 class PokemonsInfo {
-  constructor(rate, habitat, info) {
+  constructor(rate, evolution, info) {
     this.rate = rate;
-    this.habitat = habitat;
+    this.evolution = evolution;
     this.info = info;
   }
 }
@@ -52,6 +52,9 @@ class TrainerName {
 
 }
 
+////////////////////////////////////////////////////////////////////////////////////
+//do prev and next buttons with the same eventlistener for both
+////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 // Search Button
 let searchbtn = document.getElementById("searchbtn");
@@ -87,12 +90,23 @@ function getPokemon(pokemon) {
       ability1 = data['abilities'][0]['ability']['name'];
       ability2 = data['abilities'][1]['ability']['name'];
       ability3 = data['abilities'][2];
-      // if (ability2 != undefined && ability3 != undefined) {
-      //   abilities.push(ability3['ability']['name'], ability3['ability']['name']);
-      // }
       if (ability3 != undefined) {
         abilities.push(ability3['ability']['name']);
       }
+      // else if (ability3 != undefined) {
+      //   abilities.push(ability3['ability']['name']);
+      // }
+      //change to a for loop
+      // for(i in abilitites.length) {
+      //   if(ability2 != undefined) {
+      //     // abilities[i].push(ability2['ability']['name']);
+      //     console.log(abilitites[i]);
+      //   }
+      //   else if (ability3 != undefined) {
+      //     abilities[i].push(ability3['ability']['name']);
+      //   }
+      //   abilitites.push(abilities[i]);
+      // }
       abilities.push(ability1, ability2);
       pokemons = new Pokemons(images, name, type, id, hp, attack, defense, abilities);
       // let info = new PokemonsInfo();
@@ -164,7 +178,7 @@ function getInfo(pokemon) {
       console.log(data);
       let info = new PokemonsInfo(
             data["capture_rate"],
-            data["habitat"]["name"],
+            data["evolves_from_species"]["name"],
             data["flavor_text_entries"][2]["flavor_text"]
       );
       console.log(info);
@@ -188,7 +202,7 @@ function writeOnScreen(info) {
 
   var div = document.createElement("div");
   div.innerHTML = `Capture Rate: ${info.rate} <br>
-                  Habitat: ${info.habitat} <br>
+                  Evolves From: ${info.evolution} <br>
                   Description: ${info.info}`;
   document.getElementById("pokemonText").appendChild(div);
 }
