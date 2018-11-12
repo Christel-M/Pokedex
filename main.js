@@ -202,6 +202,7 @@ function button() {
     console.log("Click to turn button back "+btn);
     let text = document.createElement("h1");
     text.innerHTML= `Welcome ${trainerName.name}`;
+    text.classList.add("blurFadein");
     document.getElementById("header").appendChild(text);
     let on = document.getElementById("search");
     on.classList.remove("fadeOut");

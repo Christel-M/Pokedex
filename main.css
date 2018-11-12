@@ -137,7 +137,7 @@ button:focus {
 }
 
 .blurFadein {
-  animation: blurFadeIn 8s ease-in;
+  animation: blurFadeIn 6s ease-in;
 }
 @-webkit-keyframes blurFadeIn {
 	0% {
