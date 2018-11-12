@@ -128,7 +128,7 @@ button:focus {
 
 .fadeIn {
   opacity: 1;
-  transition: 8s opacity;
+  transition: 5s opacity;
 }
 
 .fadeOut {

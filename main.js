@@ -20,10 +20,10 @@ class Pokemons {
 }
 
 class PokemonsInfo {
-  constructor(rate, evolves, info) {
+  constructor(rate, evolves, infos) {
     this.rate = rate;
     this.evolves = evolves;
-    this.info = info;
+    this.infos = infos;
   }
 }
 
@@ -71,7 +71,11 @@ function getPokemon(pokemon) {
       console.log(data);
       //display poke info || check for id(if elseif) || display abilities (if else for num of abilities)
       var name = data["name"];
-      var type = data["types"][0]["type"]["name"];
+      // var type = data["types"][0]["type"]["name"];
+      for (i in data["types"]) {
+        var type = data["types"][i]["type"]["name"];
+        console.log(type);
+      }
       var id = data["id"];
       id = parseInt(id);
         if (id > 9 && id < 100) {
@@ -86,34 +90,13 @@ function getPokemon(pokemon) {
       var hp = data["stats"][5]["base_stat"];
       var attack = data['stats'][4]['base_stat'];
       var defense = data['stats'][3]['base_stat'];
-      var abilities = [];
-      ability1 = data['abilities'][0]['ability']['name'];
-      ability2 = data['abilities'][1]['ability']['name'];
-      ability3 = data['abilities'][2];
-      if (ability3 != undefined) {
-        abilities.push(ability3['ability']['name']);
+      for (i in data["abilities"]) {
+        var abilities = data["abilities"][i]["ability"]["name"];
+        console.log(abilities);
       }
-      // else if (ability3 != undefined) {
-      //   abilities.push(ability3['ability']['name']);
-      // }
-      //change to a for loop
-      // for(i in abilitites.length) {
-      //   if(ability2 != undefined) {
-      //     // abilities[i].push(ability2['ability']['name']);
-      //     console.log(abilitites[i]);
-      //   }
-      //   else if (ability3 != undefined) {
-      //     abilities[i].push(ability3['ability']['name']);
-      //   }
-      //   abilitites.push(abilities[i]);
-      // }
-      abilities.push(ability1, ability2);
       pokemons = new Pokemons(images, name, type, id, hp, attack, defense, abilities);
-      // let info = new PokemonsInfo();
       console.log(pokemons);
-      // showPokeImgs(pokemons)
       displayPokemon(pokemons);
-      // writeOnScreen(pokemons);
     }
 
     else if(this.readyState == 4 && this.status == 404) {
@@ -122,7 +105,7 @@ function getPokemon(pokemon) {
     }
 
   };
-  xhttp.open("GET", "http://fizal.me/pokeapi/api/v2/name/" +pokemon+ ".json", true);
+  xhttp.open("GET", "https://fizal.me/pokeapi/api/v2/name/" +pokemon+ ".json", true);
   xhttp.send();
 }
 
@@ -157,13 +140,17 @@ function displayPokemon(pokemon) {
   document.getElementById("header").appendChild(h1);
   var div = document.createElement("div");
   div.innerHTML = `ID: ${pokemon.id} <br>
-                   Type: ${pokemon.type} <br>
+                   Type:
+                   ${pokemon.type} <br>
                    HP: ${pokemon.hp} <br>
                    Attack: ${pokemon.attack} <br>
                    Defense: ${pokemon.defense} <br>
-                   Abilities: <br>
+                   Abilities:
                    ${pokemon.abilities}`;
   document.getElementById("pokemonInfo").appendChild(div);
+  // var div = document.createElement("div");
+  // div.innerHTML = pokemon.abilities.charAt(0).toUpperCase() + pokemon.abilities.slice(1);
+  // document.getElementById("pokemonInfo").appendChild(div);
 }
 //////////////////////////////////////////////////////////////////////////////////////
 //Get More Pokemon Information
@@ -177,21 +164,26 @@ function getInfo(pokemon) {
       var data = JSON.parse(this.responseText);
       console.log(data);
       let rate = data["capture_rate"];
-      // let evolves = data["evolves_from_species"]["name"];
-      if(data["evolves_from_species"]["name"] == "null") {
+      let evolves = data["evolves_from_species"];
+      // console.log(evolves);
+      if(evolves === null) {
         console.log("no");
+        evolves = "No evolution";
       }
-        for (i in data['flavor_text_entries']) {
+      else {
+        evolves = data["evolves_from_species"]["name"].charAt(0).toUpperCase() + data["evolves_from_species"]["name"].slice(1);
+      }
+        for (i in data["flavor_text_entries"]) {
           // console.log(data[i]);
           if (data['flavor_text_entries'][(i)]['language']['name'] == 'en'){
-            var text = data['flavor_text_entries'][(i)]['flavor_text'];
+            var infos = data['flavor_text_entries'][(i)]['flavor_text'];
           }
         }
-        console.log(text);
-      // let info = new PokemonsInfo(rate, evolves, text);
+        // console.log(infos);
+      let info = new PokemonsInfo(rate, evolves, infos);
       // console.log(info);
       // displayPokemon(pokemons);
-      // writeOnScreen(info);
+      writeOnScreen(info);
     }
   };
 }
@@ -211,7 +203,7 @@ function writeOnScreen(info) {
   var div = document.createElement("div");
   div.innerHTML = `Capture Rate: ${info.rate} <br>
                   Evolves From: ${info.evolves} <br>
-                  Description: ${info.info}`;
+                  Description: ${info.infos}`;
   document.getElementById("pokemonText").appendChild(div);
 }
 
