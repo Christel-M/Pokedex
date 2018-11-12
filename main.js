@@ -178,7 +178,7 @@ function getInfo(pokemon) {
       console.log(data);
       let rate = data["capture_rate"];
       // let evolves = data["evolves_from_species"]["name"];
-      if(data["evolves_from_species"]["name"] === "undefined") {
+      if(data["evolves_from_species"]["name"] == "null") {
         console.log("no");
       }
         for (i in data['flavor_text_entries']) {
