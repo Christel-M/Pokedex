@@ -176,6 +176,7 @@ function displayPokemon(pokemon) {
 function getInfo(pokemon) {
   var pokemon = document.getElementById("searchbox").value;
   pokemon = pokemon.toLowerCase();
+
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "https://pokeapi.co/api/v2/pokemon-species/" + pokemon + "/", true);
   xhttp.send();
@@ -245,9 +246,6 @@ function button() {
   }
   else {
     document.getElementById("homebtn").value="Off";
-    // let off = document.getElementById("search");
-    // off.classList.add("fadeOut");
-    // off.classList.remove("fadeIn");
     //page will reload (for now**)
     window.location.reload();
   }
