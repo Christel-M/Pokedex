@@ -57,7 +57,6 @@ class TrainerName {
 ////////////////////////////////////////////////////////////////////////////////////
 // Search Button
 let searchbtn = document.getElementById("searchbtn");
-// var pokemon = document.getElementById("searchbox").value;
 searchbtn.addEventListener("click", getPokemon1);
 searchbtn.addEventListener("click", getInfo1);
 function getPokemon1(){
@@ -228,7 +227,7 @@ function writeOnScreen(info) {
   let flavor = document.createElement("span");
   flavor.innerHTML = `<b>Capture Rate:</b> ${info.rate} <br>
                   <b>Evolves From:</b> ${info.evolves} <br>
-                  <b>Description:</b> ${info.infos}`;
+                  <b>Description:</b> ${info.infos.toLowerCase()}`;
   document.getElementById("pokemonText").appendChild(flavor);
 }
 
