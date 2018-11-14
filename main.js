@@ -42,14 +42,14 @@ class TrainerName {
 
   get(name) {
     //accetps 1 parameter and returns a pokemon object for the pokemon if found!
-    // var i = 0;
-    for(i in this.pokemons.length){
-      // console.log(pokemons[i]);
-    if(name == this.pokemons[i]) {
-      i++;
-      console.log(this.pokemons[i]);
+    for(let i = 0; i < this.pokemons.length; i++) {
+      let pokes = this.pokemons[i].name;
+      if(pokes === name) {
+        // console.log(this.pokes[i]);
+        return this.pokemons[i];
+      }
+      return false;
     }
-  }
   }
 
 }
@@ -208,6 +208,7 @@ function displayPokemon(pokemon) {
   let span2 = document.createElement("span");
   span2.innerHTML = ("Abilities: " +abilities);
   document.getElementById("pokemonInfo").appendChild(span2);
+  // let hide = document.getElementById()
 
 }
 
