@@ -1,7 +1,7 @@
-POKEMONS = [];
 var pokemon1 = "flareon";
 var pokemon2 = "dewgong";
 var pokemon3 = "kadabra";
+POKEMONS = [];
 
 class Pokemons {
   constructor(images,name, type, id, hp, attack, defense, abilities) {
@@ -24,49 +24,55 @@ class PokemonsInfo {
     this.rate = rate;
     this.evolves = evolves;
     this.infos = infos;
-    trainerName.pokemons.push(this);
     POKEMONS.push(this);
   }
 }
 
 class TrainerName {
-  constructor(name) {
-    this.name = name;
+  constructor(trainer) {
+    this.trainer = trainer;
     this.pokemons = [];
-    this.info = [];
+    // this.info = [];
   }
 
   all() {
     //accepts no parameters and returns an array of pokemon objects
-    console.log(this.pokemons);
+    return this.pokemons;
   }
 
   get(name) {
-    //accetps 1 parameter and returns a pokemon object for the pokemon it found!
-    var i = 0;
-    for(i in this.pokemons.length)
-    if(name == this.pokemons[i].name) {
+    //accetps 1 parameter and returns a pokemon object for the pokemon if found!
+    // var i = 0;
+    for(i in this.pokemons.length){
+      // console.log(pokemons[i]);
+    if(name == this.pokemons[i]) {
       i++;
       console.log(this.pokemons[i]);
-      break;
     }
+  }
   }
 
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-//do prev and next buttons with the same eventlistener for both
-////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////
 // Search Button
 let searchbtn = document.getElementById("searchbtn");
-searchbtn.addEventListener("click", getPokemon);
-searchbtn.addEventListener("click", getInfo);
-
-function getPokemon(pokemon) {
-  var pokemon = document.getElementById("searchbox").value;
+// var pokemon = document.getElementById("searchbox").value;
+searchbtn.addEventListener("click", getPokemon1);
+searchbtn.addEventListener("click", getInfo1);
+function getPokemon1(){
+  let pokemon = document.getElementById("searchbox").value;
   pokemon = pokemon.toLowerCase();
   console.log("You Searched: " +pokemon);
+  getPokemon(pokemon);
+}
+function getInfo1(){
+  var pokemon = document.getElementById("searchbox").value;
+  pokemon = pokemon.toLowerCase();
+  getInfo(pokemon);
+}
+
+function getPokemon(pokemon) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if(this.readyState == 4 && this.status == 200) {
@@ -109,9 +115,6 @@ function getPokemon(pokemon) {
 //////////////////////////////////////////////////////////////////////////////////////
 //Get More Pokemon Flavor Text Information (in english)
 function getInfo(pokemon) {
-  var pokemon = document.getElementById("searchbox").value;
-  pokemon = pokemon.toLowerCase();
-
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "https://pokeapi.co/api/v2/pokemon-species/" + pokemon + "/", true);
   xhttp.send();
@@ -173,16 +176,16 @@ function displayPokemon(pokemon) {
   document.getElementById("pokemonName").appendChild(h1);
   // display text
   let stats = document.createElement("span");
-  stats.innerHTML = `<br>ID: ${pokemon.id} <br>
-                   HP: ${pokemon.hp} <br>
-                   Attack: ${pokemon.attack} <br>
-                   Defense: ${pokemon.defense}`;
+  stats.innerHTML = `<br><b>ID: </b>${pokemon.id} <br>
+                   <b>HP:</b> ${pokemon.hp} <br>
+                   <b>Attack:</b> ${pokemon.attack} <br>
+                   <b>Defense:</b> ${pokemon.defense}`;
   document.getElementById("pokemonInfo").appendChild(stats);
   //type
   let t = 0;
   let types = "";
   typ = pokemon.type.length;
-  console.log(typ);
+  // console.log(typ);
   for(; t < typ;) {
     types += (pokemon["type"][t]["type"]["name"]+ " ");
     t++;
@@ -222,9 +225,9 @@ function writeOnScreen(info) {
   addinfo.classList.remove("fadeOut");
 
   let flavor = document.createElement("span");
-  flavor.innerHTML = `Capture Rate: ${info.rate} <br>
-                  Evolves From: ${info.evolves} <br>
-                  Description: ${info.infos}`;
+  flavor.innerHTML = `<b>Capture Rate:</b> ${info.rate} <br>
+                  <b>Evolves From:</b> ${info.evolves} <br>
+                  <b>Description:</b> ${info.infos}`;
   document.getElementById("pokemonText").appendChild(flavor);
 }
 
@@ -234,9 +237,10 @@ function button() {
   var btn = document.getElementById("homebtn").value;
   if(btn =="Off") {
     document.getElementById("homebtn").value="On";
-    console.log("Click to turn button back "+btn);
+    // console.log("Click to turn button back "+btn);
+
     let text = document.createElement("h1");
-    text.innerHTML= `Welcome ${trainerName.name}`;
+    text.innerHTML= `Welcome ${trainerName.trainer}`;
     text.classList.add("blurFadein");
     document.getElementById("header").appendChild(text);
     let on = document.getElementById("search");
@@ -250,5 +254,50 @@ function button() {
   }
 }
 
+
 var trainerName = new TrainerName("Christel", pokemon1, pokemon2, pokemon3);
+// console.log(trainerName);
 // var trainerName = new TrainerName("Christel");
+
+//show Trainer's Pokemons
+function showPokedex2(){
+let page1 = document.querySelector("#page1");
+page1.classList.add("hidden");
+let page2 = document.querySelector("#page2");
+page2.classList.remove("hidden");
+
+let poke1 = document.getElementById("flareon");
+poke1.addEventListener("click", showFlareon);
+let poke2 = document.getElementById("kadabra");
+poke2.addEventListener("click", showKadabra);
+let poke3 = document.getElementById("dewgong");
+poke3.addEventListener("click", showDewgong);
+
+function showFlareon() {
+  let page1 = document.querySelector("#page1");
+  page1.classList.remove("hidden");
+  let page2 = document.querySelector("#page2");
+  page2.classList.add("hidden");
+  getPokemon("flareon");
+  getInfo("flareon");
+}
+
+function showKadabra() {
+  let page1 = document.querySelector("#page1");
+  page1.classList.remove("hidden");
+  let page2 = document.querySelector("#page2");
+  page2.classList.add("hidden");
+  getPokemon("kadabra");
+  getInfo("kadabra");
+}
+
+function showDewgong() {
+  let page1 = document.querySelector("#page1");
+  page1.classList.remove("hidden");
+  let page2 = document.querySelector("#page2");
+  page2.classList.add("hidden");
+  getPokemon("dewgong");
+  getInfo("dewgong");
+}
+
+}

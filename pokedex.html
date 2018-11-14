@@ -16,15 +16,9 @@
       <div class="subcontainer align-items-center">
         <div id="header" class="row item1">
         </div>
-        <!-- Enter Button  -->
-        <!-- <div id="herobtn" class="row item2 fadeIn fadeIn">
-          <button class="btn btn-danger btn-lg btn-block" id="hbtn"> <a href="#page2">CLICK HERE</a></button>
-        </div> -->
         <!-- Search Button  -->
         <div id="search" class="row item2 fadeIn fadeOut">
           <input id="searchbox" class="form-control form-control-lg form-control-borderless center" type="search" placeholder="Type Pokemon Name">
-          <!-- <input class="searchbtn" id="searchbtn" type="submit" value="Search"> -->
-          <!-- <input class="searchbtn" type="reset" value="Reset" id="restart" onclick="restart()"> -->
           <button class="searchbtn" id="searchbtn">Search</button>
         </div>
         <div id="pokemonImg" class="row item3 pokemon fadeIn fadeOut">
@@ -34,9 +28,44 @@
         </span>
         <span id="pokemonText" class="row item5 blurFadein fadeOut">
         </span>
+
+        <!--Display Trainer's Pokemons on #page2-->
+        <div id="pokemonsImg" class="row item3 pokemon fadeIn fadeOut">
+          <h1 id="pokemonsName"></h1>
+        </div>
         <div class="row item6">
           <button value="Off" class="homebtn" id="homebtn" onclick="button();"></button>
-          <!-- <button value="Off" class="homebtn" id="homebtn"></button> -->
+        </div>
+        <div class="row item7 pokebtn">
+          <a onclick="showPokedex2()" id="myPokemons">My Pokemons</a>
+        </div>
+        </div>
+    </section>
+
+    <section id="page2" class="hidden">
+      <div class="container">
+      <div class="subcontainer align-items-center">
+        <div id="header" class="row item1">
+          <h1>My Pokemons</h1>
+        </div>
+        <!--Display Trainer's Pokemons-->
+        <div id="flareon" class="row item3 mypokemons">
+          <img src="images/flareon.png">
+          <!-- <h1 class="center" id="pokemonName"></h1> -->
+        </div>
+        <div id="kadabra" class="row item8 mypokemons">
+          <img src="images/kadabra.png">
+          <!-- <h1 class="center" id="pokemonName"></h1> -->
+        </div>
+        <div id="dewgong" class="row item9 mypokemons">
+          <img src="images/dewgong.png">
+          <!-- <h1 class="center" id="pokemonName"></h1> -->
+        </div>
+        <div class="row item6">
+          <button value="Off" class="homebtn" id="homebtn" onclick="button();"></button>
+        </div>
+        <div class="row item7 pokebtn">
+          <a href="#page1" id="myPokemons">My Pokemons</a>
         </div>
         </div>
     </section>

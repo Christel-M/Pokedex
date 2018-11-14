@@ -1,8 +1,8 @@
 body {
   margin: 0;
   background-color: #000000;
-  font-family: "VT323", monospace;
-  font-size: 1.78em;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.46em;
   z-index: 1;
   color: #ffffff; }
 
@@ -52,33 +52,56 @@ body {
 
 .pokemon h1 {
   font-family: "VT323", monospace;
-  font-size: 1.6em; }
+  font-size: 1.98em; }
+
+.mypokemons img {
+  width: 250px;
+  height: 250px; }
+
+.mypokemons h1 {
+  font-family: "VT323", monospace;
+  font-size: 1.98em; }
 
 .item4 {
   grid-area: C4 / D4;
   margin-top: 3%;
   margin-left: 3%;
-  justify-content: center; }
+  justify-content: flex-start; }
 
 .item5 {
   grid-column: C5 / C6;
   grid-row: C5;
   margin-top: 5%;
   margin-left: 4%;
-  justify-content: center; }
+  justify-content: flex-end; }
+
+#pokemonInfo {
+  border-right: 1px solid #3c3c3c; }
 
 #pokemonText {
-  border-left: 1px solid #3c3c3c;
   padding-left: 6%; }
 
 .item6 {
   grid-area: F1;
   justify-content: center; }
 
+.item7 {
+  grid-area: F6;
+  justify-content: center;
+  margin-bottom: 20%; }
+
+.item8 {
+  grid-column: C4 / C5;
+  grid-row: C4; }
+
+.item9 {
+  grid-column: C6;
+  grid-row: C6; }
+
 /**********************************Buttons*******************************/
 button {
-  font-family: 'VT323', monospace;
-  font-size: 1.5em; }
+  font-family: "VT323", monospace;
+  text-decoration: none; }
 
 button:focus {
   outline: none; }
@@ -109,22 +132,38 @@ button:focus {
   background-image: linear-gradient(to right, #ff0054 0%, #e92a33 100%);
   border-radius: 10px;
   color: #ffffff;
+  font-size: 1.5em;
   text-transform: uppercase;
   padding: 1%;
   width: 100%;
   transition: all ease 0.3s; }
 
+.pokebtn {
+  background-color: #fedf03;
+  color: #000000;
+  border: 3px solid #000000;
+  padding: 5px;
+  font-size: .64em; }
+
+a {
+  color: #000000;
+  text-decoration: none; }
+
+a:hover {
+  text-decoration: none;
+  color: #000000; }
+
 /*********************************Animations************************************/
 .fadeIn {
   opacity: 1;
-  transition: 5s opacity; }
+  transition: 8s opacity; }
 
 .fadeOut {
   opacity: 0;
   transition: none; }
 
 .blurFadein {
-  animation: blurFadeIn 4s ease-in; }
+  animation: blurFadeIn 2s ease-in; }
 
 @-webkit-keyframes blurFadeIn {
   0% {
@@ -134,7 +173,7 @@ button:focus {
   50% {
     opacity: 0.5;
     text-shadow: 0px 0px 10px #ffffff;
-    -webkit-transform: scale(1.1); }
+    -webkit-transform: scale(1.2); }
   100% {
     opacity: 1;
     text-shadow: 0px 0px 1px #ffffff;
