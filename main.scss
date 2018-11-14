@@ -1,12 +1,14 @@
 $font-stack:    'VT323', monospace;
 $primary-color: #ffffff;
 $background-color: #000000;
+$font-size-stack: 1.78em;
+$btn-color: #fedf03;
 
 body {
   margin: 0;
   background-color: $background-color;
   font-family: $font-stack;
-  font-size: 1.5em;
+  font-size: $font-size-stack;
   z-index: 1;
   color: $primary-color;
 }
@@ -47,7 +49,7 @@ body {
 }
 
 .item1 h1 {
-  font-family: 'VT323', monospace;
+  font-family: $font-stack;
   font-size: 3.2em;
   margin-bottom: 7%;
 }
@@ -61,7 +63,6 @@ body {
 .item3 {
   grid-column: C2 / C3;
   grid-row: C2;
-  justify-content: center;
 }
 
 .pokemon img {
@@ -69,19 +70,29 @@ body {
   height: 100%;
 }
 
+.pokemon h1 {
+  font-family: $font-stack;
+  font-size: 1.6em;
+}
+
 .item4 {
   grid-area: C4 / D4;
-  margin-left: 5%;
+  margin-top: 3%;
+  margin-left: 3%;
   justify-content: center;
 }
 
 .item5 {
   grid-column: C5 / C6;
   grid-row: C5;
-  display: inline;
-  margin-top: 22%;
-  margin-left: 9%;
+  margin-top: 5%;
+  margin-left: 4%;
   justify-content: center;
+}
+
+#pokemonText {
+  border-left: 1px solid #3c3c3c;
+  padding-left: 6%;
 }
 
 .item6{
@@ -101,7 +112,7 @@ button:focus {
 }
 
 .homebtn {
-  background-color: #0ea4c9;
+  background-color: $btn-color;
   border: 3px solid $background-color;
   padding: 15%;
   margin: 4px 2px;
@@ -112,14 +123,14 @@ button:focus {
   outline-style: none;
 }
 @keyframes glowing {
-  0% { background-color: #0ea4c9; box-shadow: 0 0 3px #0ea4c9; }
-  50% { background-color: #42d9ff; box-shadow: 0 0 40px #42d9ff; }
-  100% { background-color: #0ea4c9; box-shadow: 0 0 3px #0ea4c9; }
+  0% { background-color: $btn-color; box-shadow: 0 0 3px $btn-color; }
+  50% { background-color: #fffa7c; box-shadow: 0 0 40px #fffa7c; }
+  100% { background-color: $btn-color; box-shadow: 0 0 3px $btn-color; }
 }
 
 .searchbtn {
   margin-top: 5%;
-  background-image: linear-gradient(to right, #222222 0%, #616060 100%);
+  background-image: linear-gradient(to right, #ff0054 0%, #e92a33 100%);
 	border-radius: 10px;
 	color: $primary-color;
   text-transform: uppercase;
@@ -141,7 +152,7 @@ button:focus {
 }
 
 .blurFadein {
-  animation: blurFadeIn 6s ease-in;
+  animation: blurFadeIn 4s ease-in;
 }
 @-webkit-keyframes blurFadeIn {
 	0% {

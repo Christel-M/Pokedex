@@ -105,74 +105,9 @@ function getPokemon(pokemon) {
   xhttp.send();
 }
 
-// var trainerName = new TrainerName("Christel");
-var trainerName = new TrainerName("Christel", pokemon1, pokemon2, pokemon3);
 
-////////////////////////////////////////////////////////////////////////////////////////
-//Display pokemon on screen
-function displayPokemon(pokemon) {
-  //remove search block and h1
-  let removebtn = document.getElementById("search");
-  removebtn.classList.add("fadeOut");
-  removebtn.classList.add("hidden");
-  removebtn.classList.remove("fadeIn");
-  let text = document.querySelector("h1");
-  text.classList.add("hidden");
-  text.classList.remove("fadeIn");
-  //add image block
-  let addimg = document.getElementById("pokemonImg");
-  addimg.classList.add("blurFadein");
-  addimg.classList.remove("fadeOut");
-
-  let img = document.createElement("img");
-  img.src = pokemon.images;
-  document.getElementById("pokemonImg").appendChild(img);
-  //add info block
-  let addinfo = document.getElementById("pokemonInfo");
-  addinfo.classList.add("blurFadein");
-  addinfo.classList.remove("fadeOut");
-
-  let h1 = document.createElement("h1");
-  h1.innerHTML = pokemon.name.toUpperCase();
-  document.getElementById("header").appendChild(h1);
-  // display text
-  let stats = document.createElement("span");
-  stats.innerHTML = `ID: ${pokemon.id} <br>
-                   HP: ${pokemon.hp} <br>
-                   Attack: ${pokemon.attack} <br>
-                   Defense: ${pokemon.defense} <br>`;
-  document.getElementById("pokemonInfo").appendChild(stats);
-  //type
-  let t = 0;
-  let types = "";
-  typ = pokemon.type.length;
-  console.log(typ);
-  for(; t < typ;) {
-    types += (pokemon["type"][t]["type"]["name"] + "\n");
-    t++;
-  }
-  // console.log(types);
-  let span3 = document.createElement("span");
-  span3.innerHTML = ("Type: " +types);
-  document.getElementById("pokemonInfo").appendChild(span3);
-
-  // display abilitites
-  let i = 0;
-  let abilities = "";
-  abil = pokemon.abilities.length;
-  // console.log(abil);
-  for(; i < abil;){
-    abilities += (pokemon["abilities"][i]["ability"]["name"] + "\n") ;
-    i++;
-  }
-  // console.log(abilities);
-  let span2 = document.createElement("span");
-  span2.innerHTML = ("Abilities: " +abilities);
-  document.getElementById("pokemonInfo").appendChild(span2);
-
-}
 //////////////////////////////////////////////////////////////////////////////////////
-//Get More Pokemon Information
+//Get More Pokemon Flavor Text Information (in english)
 function getInfo(pokemon) {
   var pokemon = document.getElementById("searchbox").value;
   pokemon = pokemon.toLowerCase();
@@ -210,7 +145,71 @@ function getInfo(pokemon) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
-//Display info on screen
+//Display pokemon's stats on screen
+function displayPokemon(pokemon) {
+  //remove search block and h1
+  let removebtn = document.getElementById("search");
+  removebtn.classList.add("fadeOut");
+  removebtn.classList.add("hidden");
+  removebtn.classList.remove("fadeIn");
+  let text = document.querySelector("h1");
+  text.classList.add("hidden");
+  text.classList.remove("fadeIn");
+  //add image block
+  let addimg = document.getElementById("pokemonImg");
+  addimg.classList.add("fadeIn");
+  addimg.classList.remove("fadeOut");
+
+  let img = document.createElement("img");
+  img.src = pokemon.images;
+  document.getElementById("pokemonImg").appendChild(img);
+  //add info block
+  let addinfo = document.getElementById("pokemonInfo");
+  addinfo.classList.add("blurFadein");
+  addinfo.classList.remove("fadeOut");
+
+  let h1 = document.createElement("h1");
+  h1.innerHTML = pokemon.name.toUpperCase();
+  document.getElementById("pokemonName").appendChild(h1);
+  // display text
+  let stats = document.createElement("span");
+  stats.innerHTML = `<br>ID: ${pokemon.id} <br>
+                   HP: ${pokemon.hp} <br>
+                   Attack: ${pokemon.attack} <br>
+                   Defense: ${pokemon.defense}`;
+  document.getElementById("pokemonInfo").appendChild(stats);
+  //type
+  let t = 0;
+  let types = "";
+  typ = pokemon.type.length;
+  console.log(typ);
+  for(; t < typ;) {
+    types += (pokemon["type"][t]["type"]["name"]+ " ");
+    t++;
+  }
+  // console.log(types);
+  let span3 = document.createElement("span");
+  span3.innerHTML = ("Type: " +types);
+  document.getElementById("pokemonInfo").appendChild(span3);
+
+  // display abilitites
+  let i = 0;
+  let abilities = "";
+  abil = pokemon.abilities.length;
+  // console.log(abil);
+  for(; i < abil;){
+    abilities += (pokemon["abilities"][i]["ability"]["name"] +" ") ;
+    i++;
+  }
+  // console.log(abilities);
+  let span2 = document.createElement("span");
+  span2.innerHTML = ("Abilities: " +abilities);
+  document.getElementById("pokemonInfo").appendChild(span2);
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+//Display flavor text on screen
 function writeOnScreen(info) {
   // remove search block
   let removebtn = document.getElementById("search");
@@ -250,3 +249,6 @@ function button() {
     window.location.reload();
   }
 }
+
+var trainerName = new TrainerName("Christel", pokemon1, pokemon2, pokemon3);
+// var trainerName = new TrainerName("Christel");
