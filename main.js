@@ -54,6 +54,9 @@ class TrainerName {
 
 }
 
+var pokemonIsDisplayed = false;
+var infoIsDisplayed = false;
+
 ////////////////////////////////////////////////////////////////////////////////////
 // Search Button
 let searchbtn = document.getElementById("searchbtn");
@@ -77,6 +80,11 @@ function getPokemon(pokemon) {
     if(this.readyState == 4 && this.status == 200) {
       var data = JSON.parse(this.responseText);
       console.log(data);
+      //check if data is already uploaded;
+      if(pokemonIsDisplayed == true) {
+        clearInput();
+      }
+
       //display poke info || check for id(if elseif) || display abilities (if else for num of abilities)
       var name = data["name"];
       var type = data["types"];
@@ -98,6 +106,7 @@ function getPokemon(pokemon) {
       pokemons = new Pokemons(images, name, type, id, hp, attack, defense, abilities);
       console.log(pokemons);
       displayPokemon(pokemons);
+
     }
 
     else if(this.readyState == 4 && this.status == 404) {
@@ -124,6 +133,11 @@ function getInfo(pokemon) {
     if (this.readyState == 4 && this.status == 200) {
       var data = JSON.parse(this.responseText);
       console.log(data);
+      //check if data is already uploaded;
+      if(infoIsDisplayed == true) {
+        clearInput();
+      }
+
       let rate = data["capture_rate"];
       let evolves = data["evolves_from_species"];
       // console.log(evolves);
@@ -174,7 +188,7 @@ function displayPokemon(pokemon) {
 
   let h1 = document.createElement("h1");
   h1.innerHTML = pokemon.name.toUpperCase();
-  document.getElementById("pokemonName").appendChild(h1);
+  document.getElementById("pokemonImg").appendChild(h1);
   // display text
   let stats = document.createElement("span");
   stats.innerHTML = `<br><b>ID: </b>${pokemon.id} <br>
@@ -209,7 +223,8 @@ function displayPokemon(pokemon) {
   let span2 = document.createElement("span");
   span2.innerHTML = ("Abilities: " +abilities);
   document.getElementById("pokemonInfo").appendChild(span2);
-  // let hide = document.getElementById()
+
+  pokemonIsDisplayed = true;
 
 }
 
@@ -231,6 +246,8 @@ function writeOnScreen(info) {
                   <b>Evolves From:</b> ${info.evolves} <br>
                   <b>Description:</b> ${info.infos.toLowerCase()}`;
   document.getElementById("pokemonText").appendChild(flavor);
+
+  infoIsDisplayed = true;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -241,17 +258,26 @@ function button() {
     document.getElementById("homebtn").value="On";
     // console.log("Click to turn button back "+btn);
 
-    let text = document.createElement("h1");
-    text.innerHTML= `Welcome ${trainerName.trainer}`;
-    text.classList.add("blurFadein");
-    document.getElementById("header").appendChild(text);
+    // let text = document.createElement("h1");
+    // text.innerHTML= `Welcome ${trainerName.trainer}`;
+    // document.getElementById("header").appendChild(text);
+    header = document.getElementById("header")
+    header.classList.add("blurFadein");
+    header.classList.remove("hidden");
     let on = document.getElementById("search");
     on.classList.remove("hidden");
     on.classList.add("fadeIn");
   }
   else {
     document.getElementById("homebtn").value="Off";
+    // let headeroff = document.getElementById("header");
+    // headeroff.classList.remove("blurFadeIn");
+    // headeroff.classList.add("hidden");
+    // let off = document.getElementById("search");
+    // off.classList.add("hidden");
+    // off.classList.remove("fadeIn");
     window.location.reload();
+    // clearInput();
   }
 }
 
@@ -262,10 +288,6 @@ var trainerName = new TrainerName("Christel", pokemon1, pokemon2, pokemon3);
 
 //show Trainer's Pokemons
 function showPokedex2(){
-
-  var btn = document.getElementById("myPokemons").value;
-  if(btn =="Off") {
-    document.getElementById("myPokemons").value="On";
 
     let page1 = document.querySelector("#page1");
     page1.classList.add("hidden");
@@ -305,10 +327,11 @@ function showPokedex2(){
       getPokemon("dewgong");
       getInfo("dewgong");
     }
-  }
-  else {
-    document.getElementById("myPokemons").value="Off";
-    window.location.reload();
-  }
-
+}
+//////////////////////////////////////////////////////////////////////////////////////
+function clearInput() {
+  let addimg = document.getElementById("pokemonImg").innerHTML = "";
+  let addinfo = document.getElementById("pokemonInfo").innerHTML = "";
+  let addinfos = document.getElementById("pokemonText").innerHTML = "";
+  let flavor = document.createElement("span").innerHTML = "";
 }
