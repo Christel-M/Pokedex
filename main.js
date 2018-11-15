@@ -103,6 +103,9 @@ function getPokemon(pokemon) {
     else if(this.readyState == 4 && this.status == 404) {
       console.log("No file found!");
       alert("No File Found!");
+
+      let search = document.getElementById("searchbox");
+      search.value = "";
     }
 
   };
@@ -140,7 +143,6 @@ function getInfo(pokemon) {
         // console.log(infos);
       let info = new PokemonsInfo(rate, evolves, infos);
       // console.log(info);
-      // displayPokemon(pokemons);
       writeOnScreen(info);
     }
   };
@@ -151,16 +153,16 @@ function getInfo(pokemon) {
 function displayPokemon(pokemon) {
   //remove search block and h1
   let removebtn = document.getElementById("search");
-  removebtn.classList.add("fadeOut");
   removebtn.classList.add("hidden");
   removebtn.classList.remove("fadeIn");
+
   let text = document.querySelector("h1");
   text.classList.add("hidden");
   text.classList.remove("fadeIn");
   //add image block
   let addimg = document.getElementById("pokemonImg");
   addimg.classList.add("fadeIn");
-  addimg.classList.remove("fadeOut");
+  addimg.classList.remove("hidden");
 
   let img = document.createElement("img");
   img.src = pokemon.images;
@@ -168,7 +170,7 @@ function displayPokemon(pokemon) {
   //add info block
   let addinfo = document.getElementById("pokemonInfo");
   addinfo.classList.add("blurFadein");
-  addinfo.classList.remove("fadeOut");
+  addinfo.classList.remove("hidden");
 
   let h1 = document.createElement("h1");
   h1.innerHTML = pokemon.name.toUpperCase();
@@ -222,7 +224,7 @@ function writeOnScreen(info) {
   //add info block
   let addinfo = document.getElementById("pokemonText");
   addinfo.classList.add("blurFadein");
-  addinfo.classList.remove("fadeOut");
+  addinfo.classList.remove("hidden");
 
   let flavor = document.createElement("span");
   flavor.innerHTML = `<b>Capture Rate:</b> ${info.rate} <br>
@@ -244,12 +246,11 @@ function button() {
     text.classList.add("blurFadein");
     document.getElementById("header").appendChild(text);
     let on = document.getElementById("search");
-    on.classList.remove("fadeOut");
+    on.classList.remove("hidden");
     on.classList.add("fadeIn");
   }
   else {
     document.getElementById("homebtn").value="Off";
-    //page will reload (for now**)
     window.location.reload();
   }
 }
@@ -261,43 +262,53 @@ var trainerName = new TrainerName("Christel", pokemon1, pokemon2, pokemon3);
 
 //show Trainer's Pokemons
 function showPokedex2(){
-let page1 = document.querySelector("#page1");
-page1.classList.add("hidden");
-let page2 = document.querySelector("#page2");
-page2.classList.remove("hidden");
 
-let poke1 = document.getElementById("flareon");
-poke1.addEventListener("click", showFlareon);
-let poke2 = document.getElementById("kadabra");
-poke2.addEventListener("click", showKadabra);
-let poke3 = document.getElementById("dewgong");
-poke3.addEventListener("click", showDewgong);
+  var btn = document.getElementById("myPokemons").value;
+  if(btn =="Off") {
+    document.getElementById("myPokemons").value="On";
 
-function showFlareon() {
-  let page1 = document.querySelector("#page1");
-  page1.classList.remove("hidden");
-  let page2 = document.querySelector("#page2");
-  page2.classList.add("hidden");
-  getPokemon("flareon");
-  getInfo("flareon");
-}
+    let page1 = document.querySelector("#page1");
+    page1.classList.add("hidden");
+    let page2 = document.querySelector("#page2");
+    page2.classList.remove("hidden");
 
-function showKadabra() {
-  let page1 = document.querySelector("#page1");
-  page1.classList.remove("hidden");
-  let page2 = document.querySelector("#page2");
-  page2.classList.add("hidden");
-  getPokemon("kadabra");
-  getInfo("kadabra");
-}
+    let poke1 = document.getElementById("flareon");
+    poke1.addEventListener("click", showFlareon);
+    let poke2 = document.getElementById("kadabra");
+    poke2.addEventListener("click", showKadabra);
+    let poke3 = document.getElementById("dewgong");
+    poke3.addEventListener("click", showDewgong);
 
-function showDewgong() {
-  let page1 = document.querySelector("#page1");
-  page1.classList.remove("hidden");
-  let page2 = document.querySelector("#page2");
-  page2.classList.add("hidden");
-  getPokemon("dewgong");
-  getInfo("dewgong");
-}
+    function showFlareon() {
+      let page1 = document.querySelector("#page1");
+      page1.classList.remove("hidden");
+      let page2 = document.querySelector("#page2");
+      page2.classList.add("hidden");
+      getPokemon("flareon");
+      getInfo("flareon");
+    }
+
+    function showKadabra() {
+      let page1 = document.querySelector("#page1");
+      page1.classList.remove("hidden");
+      let page2 = document.querySelector("#page2");
+      page2.classList.add("hidden");
+      getPokemon("kadabra");
+      getInfo("kadabra");
+    }
+
+    function showDewgong() {
+      let page1 = document.querySelector("#page1");
+      page1.classList.remove("hidden");
+      let page2 = document.querySelector("#page2");
+      page2.classList.add("hidden");
+      getPokemon("dewgong");
+      getInfo("dewgong");
+    }
+  }
+  else {
+    document.getElementById("myPokemons").value="Off";
+    window.location.reload();
+  }
 
 }

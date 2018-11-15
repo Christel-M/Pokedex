@@ -40,7 +40,7 @@ body {
 }
 
 .item1 {
-  grid-column: B2 / B6;
+  grid-column: B2 / B4;
   grid-row: B2;
   justify-content: center;
   color: $primary-color;
@@ -52,6 +52,11 @@ body {
   font-family: $font-stack;
   font-size: 3.2em;
   margin-bottom: 7%;
+}
+
+#header {
+  margin-left: 32%;
+  margin-right: -35%;
 }
 
 .item2 {
@@ -128,10 +133,6 @@ body {
   grid-row: C6;
 }
 
-.item10 {
-  grid-column: C6;
-  grid-row: C6;
-}
 
 /**********************************Buttons*******************************/
 

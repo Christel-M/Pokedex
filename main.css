@@ -25,7 +25,7 @@ body {
   grid-template-areas: "A1 A2 A3 A4 A5 A6 A7" "B1 B2 B3 B4 B5 B6 B7" "C1 C2 C3 C4 C5 C6 C7" "D1 D2 D3 D4 D5 D6 D7" "E1 E2 E3 E4 E5 E6 E7" "F1 F2 F3 F4 F5 F6 F7"; }
 
 .item1 {
-  grid-column: B2 / B6;
+  grid-column: B2 / B4;
   grid-row: B2;
   justify-content: center;
   color: #ffffff;
@@ -36,6 +36,10 @@ body {
   font-family: "VT323", monospace;
   font-size: 3.2em;
   margin-bottom: 7%; }
+
+#header {
+  margin-left: 32%;
+  margin-right: -35%; }
 
 .item2 {
   grid-column: C3 / C5;
@@ -95,10 +99,6 @@ body {
   grid-row: C4; }
 
 .item9 {
-  grid-column: C6;
-  grid-row: C6; }
-
-.item10 {
   grid-column: C6;
   grid-row: C6; }
 
